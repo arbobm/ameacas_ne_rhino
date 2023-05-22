@@ -15,5 +15,5 @@ WORKDIR /home/app
 COPY app .
 RUN chown app:app -R /home/app
 USER app
-EXPOSE 3838
+EXPOSE 80
 CMD ["R", "-e", "shiny::runApp('/home/app')"]

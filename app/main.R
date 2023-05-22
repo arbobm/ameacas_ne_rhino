@@ -883,8 +883,8 @@ server <- function(id) {
           cores_mineracao <- freq_area |>
             dplyr::filter(new_id %in% as.numeric(unique(mineracao))) |>
             dplyr::select(new_id, color_number) |>
-            arrange(new_id) |>
-            pull(color_number)
+            dplyr::arrange(new_id) |>
+            dplyr::pull(color_number)
           
           leafletProxy("map", data = distribution) |>
             # leaflet() |>
@@ -900,7 +900,7 @@ server <- function(id) {
               data = mineracao,
               opacity = 0.6,
               labels = "Mineração",
-              colors = cores_mineracao[-1],
+              colors = cores_mineracao,
               title = "Atividade",
               position = "topright"
             )

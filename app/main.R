@@ -3,8 +3,8 @@
 box::use(
   shiny[
     navbarPage, tabPanel, div, moduleServer, NS, renderUI, tags, uiOutput,
-    absolutePanel, reactive, observe, observeEvent, h4, h5, checkboxInput, 
-    actionButton, p, br, req, tagList
+    absolutePanel, reactive, observe, observeEvent, h3, h4, h5, strong, 
+    checkboxInput, actionButton, p, br, req, tagList
   ],
   leaflet[
     leafletOutput, renderLeaflet, colorFactor, addMapPane, addProviderTiles,
@@ -157,6 +157,10 @@ ui <- function(id) {
              
              tabPanel("Modo de Usar",
                       
+                      h3(strong("Em construção!!",
+                                br(),
+                                br())),
+                      
                       p(
                         "- Tem que apertar o botão 'Atualizar' pra fazer as camadas da barra da esquerda aparecerem;",
                         br(),
@@ -168,13 +172,19 @@ ui <- function(id) {
              # aba 3 ------------------------------------------------------------
              
              tabPanel("Fontes",
-                      
+                      h3(strong("Em construção!!",
+                                br(),
+                                br())),
                       p("Colocar tabela com fonte dos dados usando a do Mapbiomas como modelo.")
              ),
              
              # aba 4 ------------------------------------------------------------
              
              tabPanel("Créditos",
+                      
+                      h3(strong("Em construção!!",
+                                br(),
+                                br())),
                       
                       # p("- Se deixar o campo de Espécies vazio, aparecem todos os pontos.")
              )

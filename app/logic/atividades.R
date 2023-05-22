@@ -76,8 +76,10 @@ ufv <- read_sf("app/shapes/ufv_ne.shp")
 #' @export
 mineracao <- raster::raster("app/rasters/mineracao_alb_1k.tif")
 
-#'@export
-mineracao_anm <- sf::read_sf("app/shapes/")
+#' @export
+barragens_anm <- sf::read_sf("app/shapes/mineracao_anm.shp")
+
+
 
 ## hidreletricas
 

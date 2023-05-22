@@ -52,7 +52,8 @@ box::use(
   app/logic/oportunidades[tis, ucs, pal_ucs, kba_ne],
   app/logic/atividades[freq_area, areas_agric, areas_urb, pastagem, 
                        aerogeradores, eols_pol, ufv, mineracao, ahes, ahes_pol,
-                       reserv_recrea, silvicultura, estradas_federais, ferrovias],
+                       reserv_recrea, silvicultura, estradas_federais, ferrovias,
+                       mineracao_anm],
   app/logic/funcoes[formata_numero]
   
   
@@ -132,6 +133,9 @@ ui <- function(id) {
                                                       value = FALSE),
                                         checkboxInput(ns("mineracao"),
                                                       label = h5("Mineração"),
+                                                      value = FALSE),
+                                        checkboxInput(ns("mineracaoanm"),
+                                                      label = h5("Mineração - barragens"),
                                                       value = FALSE),
                                         
                                         checkboxInput(ns("ahe"), 
@@ -918,6 +922,71 @@ server <- function(id) {
         }
         
         # ### termina mapa de mineracao ------------------------------------------------------
+        
+        ### começa mapa de mineraçãobarragens ------------------------------------------------------
+        if (input$mineracaoanm) {
+          
+          cores_barragensanm <- c(
+            "#67dddd", # Baixo
+            "#ff9900", # Médio
+            "#e661ac", # Alto
+            "gray"     # N/A
+          )
+          
+          barragens_anm$ctgr_d_ <- factor(barragens_anm$ctgr_d_,
+                                          levels = c("Baixo", "Médio", "Alto", "N/A"))
+          
+          pal_barraganm <- colorFactor(cores_barragensanm, 
+                                       domain = barragens_anm$ctgr_d_)
+          
+          leafletProxy("map", data = distribution) |>
+          # leaflet() |> 
+          #   addTiles() |> 
+            addCircleMarkers(
+              group = "atividade",
+              data = barragens_anm,
+              lng = ~long_dd,
+              lat = ~lat_dd,
+              radius = 4,
+              fillOpacity = 1, weight = 1,
+              stroke = TRUE, color = "black", opacity = 1,
+              fillColor = ~pal_barraganm(barragens_anm$ctgr_d_),
+              options = pathOptions(pane = "points"),
+              popup = paste0(
+                "<strong>",
+                barragens_anm$nm_d_br,
+                "</strong>",
+                "</br><strong>Município:</strong> ",
+                barragens_anm$municip,
+                "</br><strong>Estado:</strong> ",
+                barragens_anm$uf,
+                "</br><strong>Minério principal:</strong> ",
+                barragens_anm$mnr_prn,
+                "</br><strong>Método construtivo:</strong> ", 
+                barragens_anm$mtd_cns,
+                "</br><strong>Categoria de risco:</strong> ",
+                barragens_anm$ctgr_d_,
+                "</br><strong>Dano Potencial Associado:</strong> ",
+                barragens_anm$dn_ptn_,
+                "</br><strong>Nível de emergência:</strong> ",
+                barragens_anm$nvl_d_m,
+                "</br><strong>Status DCE atual:</strong> ",
+                barragens_anm$dce_atu,
+                "</br><strong>Status DCO atual:</strong> ",
+                barragens_anm$dco_atu
+              )) |>  
+            addLegend(position = "topright",
+                      group = "atividade",
+                      data = barragens_anm,
+                      values = ~ ctgr_d_,
+                      colors = cores_barragensanm,
+                      labels = levels(barragens_anm$ctgr_d_),
+                      opacity = 0.6,
+                      title = "Categorias de risco")
+          
+        }
+        
+        # ### termina mapa de mineracao barragens------------------------------------------------------
         
         ### começa mapa de ahes ------------------------------------------------------
         if (input$ahe) {

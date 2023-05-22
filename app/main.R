@@ -45,7 +45,7 @@ box::use(
 )
 
 box::use(
-  # app/view/leaflet_principal,
+  app/view/especies_pts,
   app/logic/especies_alvo[species_list, occ, combined_distribution],
   app/logic/limites[biomas, aes_pat, factpal_pats, aes_panne, bacias_ana,
                     ufs_ne],
@@ -83,12 +83,15 @@ ui <- function(id) {
                                         
                                         ## Selecionar espécies ameacadas
                                         
+                                        ## Selecionar espécies ameacadas
+                                        
                                         pickerInput(ns("especies"),
                                                     label = h5("Espécies:"), 
                                                     choices = species_list, 
                                                     multiple = TRUE,
                                                     options = list(`actions-box` = TRUE)
                                         ),
+                                        
                                         
                                         
                                         
@@ -436,71 +439,71 @@ server <- function(id) {
     })
     
     
-    
+
     ### lista de espécies
-    
-    
+
+
     # update species list
-    
+
     new_species_list <- reactive({
       sp_list <- occ |>
         dplyr::select(nome_cientifico) |>
         dplyr::arrange(nome_cientifico) |>
         dplyr::distinct() |>
         dplyr::pull(nome_cientifico)
-      
+
     })
-    
+
     observe({
       # updateSelectizeInput(session,
       updatePickerInput(session,
-                        "especies", 
+                        "especies",
                         choices = new_species_list()
                         # selected = head(new_species_list(), 1)
       )
     })
-    
-    
-    
+
+
+
     # Filter distributions
     distribution <- reactive({
-      
-      
-      combined_distribution |> 
+
+
+      combined_distribution |>
         filter(nome_cientifico %in% input$especies)
-      
-      
+
+
     })
-    
+
     observeEvent(
- 
+
       input$update,
-      
+
       {
         show_modal_spinner()
         distribution <- distribution()
         # bbox <- sf::st_bbox(as(distribution, "sf")) |>
         #   as.vector()
-        
-        
+
+
         # sp_factpal <- colorFactor(sp_pal, domain = distribution$taxon)
-        
+
         colors <- c("#cce226", # Quase Ameaçada (NT)
                     "#fae813",  # Vulnerável (VU)
                     "#fc7f40", # Em Perigo (EN)
                     "#d81e06", # Criticamente em Perigo (CR)
                     "#000000" # Extinta (EX)
-                    
-                    
+
+
         )
-        
+
         occ$cat_validada <- factor(occ$cat_validada,
                                    levels = c("Quase Ameaçada (NT)",
                                               "Vulnerável (VU)",
                                               "Em Perigo (EN)",
                                               "Criticamente em Perigo (CR)",
                                               "Extinta (EX)"))
-        
+
         occ <- occ |>
           dplyr::mutate(group =
                           case_when(
@@ -510,10 +513,10 @@ server <- function(id) {
                             cat_validada == "Criticamente em Perigo (CR)" ~ "cr",
                             cat_validada == "Extinta (EX)" ~ "ex"
                           ))
-        
+
         factpal <- colorFactor(colors, domain = occ$cat_validada)
-        
-        
+
+
         leafletProxy("map", data = distribution) |>
           clearGroup("distribution") |>
           clearGroup("occpoints") |>
@@ -524,11 +527,11 @@ server <- function(id) {
           removeControl("distribution") |>
           clearImages() |>
           clearControls() |>
-          
+
           # distribution <- occ
-          # leaflet() |> 
-          # addTiles() |> 
-          
+          # leaflet() |>
+          # addTiles() |>
+
           addCircleMarkers(data = distribution, group = "occpoints",
                            lng =  ~ as.numeric(long),
                            lat =  ~ as.numeric(lat),
@@ -562,18 +565,18 @@ server <- function(id) {
                              distribution$descricao_amecas
                            ),
                            popupOptions = popupOptions(maxWidth = 500)
-                           
-          ) |> 
+
+          ) |>
           addLegend(data = distribution,
                     position = "topright",
                     pal = factpal,
                     values = ~ cat_validada,
                     layerId = "distribution",
                     opacity = 0.6,
-                    title = "Espécies") 
-        # |> 
+                    title = "Espécies")
+        # |>
         #   fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
-        
+
         ### termina mapa espécie alvo ------------
         
         # ### começa mapa de agricultura ------------------------------------------------------

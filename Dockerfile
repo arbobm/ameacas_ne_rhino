@@ -1,19 +1,27 @@
-FROM rocker/r-base:latest
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    sudo \
-    libcurl4-gnutls-dev \
-    libcairo2-dev \
-    libxt-dev \
+FROM rocker/shiny:4.2.2
+ENV RENV_CONFIG_REPOS_OVERRIDE https://packagemanager.rstudio.com/cran/latest
+
+RUN apt-get update -qq && \ 
+  apt-get install -y --no-install-recommends \
+    gdal-bin \
+    git \
+    libgdal-dev \
+    libgeos-dev \
+    libicu-dev \
+    libpng-dev \
+    libproj-dev \
+    libsqlite3-dev \
     libssl-dev \
-    libssh2-1-dev \
-    && rm -rf /var/lib/apt/lists/*
-RUN install.r shiny
-RUN echo "local(options(shiny.port = 8080, shiny.host = '0.0.0.0'))" > /usr/lib/R/etc/Rprofile.site
-RUN addgroup --system app \
-    && adduser --system --ingroup app app
-WORKDIR /home/app
-COPY app .
-RUN chown app:app -R /home/app
-USER app
-EXPOSE 8080
-CMD ["R", "-e", "shiny::runApp('/home/app')"]
+    libudunits2-dev \
+    libxml2-dev \
+    make \
+    pandoc \
+    zlib1g-dev && \
+  apt-get clean && \ 
+  rm -rf /var/lib/apt/lists/*
+COPY shiny_renv.lock renv.lock
+RUN Rscript -e "install.packages('renv')"
+RUN Rscript -e "renv::restore()"
+COPY . /srv/shiny-server/
+EXPOSE 3838
+CMD ["/usr/bin/shiny-server"]

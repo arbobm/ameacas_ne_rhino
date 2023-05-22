@@ -405,8 +405,16 @@ server <- function(id) {
                     # color = "orange",
                     weight = 2,
                     smoothFactor = 1,
-                    fillOpacity = 0.3,
+                    fillOpacity = 0.6,
                     label = ~ htmlEscape(AEs),
+                    popup = paste(
+                      "<strong>",
+                      aes_pat$AEs,
+                      "</strong>",
+                      "</br>
+                <strong>Finalidade:</strong>",
+                      aes_pat$finalidade),
+                    
                     options = pathOptions(pane = "polygons")
         ) |>
         addLegend(

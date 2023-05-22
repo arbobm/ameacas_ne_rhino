@@ -88,12 +88,12 @@ aes_pat_list <- list()
 
 for (i in 1:length(aes_pat_files)) {
   
-  shp <- read_sf(aes_pat_files[i])
-  nome <- unlist(str_split(unlist(str_split(aes_pat_files[i], "/"))[2], "_"))[2]
+  shp <- sf::read_sf(aes_pat_files[i])
+  nome <- unlist(stringr::str_split(unlist(stringr::str_split(aes_pat_files[i], "/"))[3], "_"))[2]
   
   shp <- shp |> 
-    mutate(finalidade = nome) |> 
-    select(-geometry, geometry)
+    dplyr::mutate(finalidade = nome) |> 
+    dplyr::select(-geometry, geometry)
   
   aes_pat_list[[i]] <- shp
   
@@ -101,7 +101,7 @@ for (i in 1:length(aes_pat_files)) {
 
 #' @export
 aes_pat <- aes_pat_list |> 
-  bind_rows()
+  dplyr::bind_rows()
 
 aes_pat$finalidade <- factor(aes_pat$finalidade, levels = c("conservacao", 
                                                             "restauracao"),

@@ -3,3 +3,13 @@
 .Rdata
 .httr-oauth
 .DS_Store
+
+
+## rasters preparatorios
+app/rasters/agric.tif
+app/rasters/mapbiomas71_ne.tif
+app/rasters/mined_subst_ne.tif
+app/rasters/mineracao.tif
+app/rasters/pastagem.tif
+app/rasters/silvicultura.tif
+app/rasters/urbano.tif

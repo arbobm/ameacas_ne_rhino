@@ -891,7 +891,7 @@ server <- function(id) {
             #   addTiles() |>
             addRasterImage(
               mineracao,
-              colors = c(cores_mineracao, "transparent"),
+              colors = c(cores_mineracao),
               opacity = 0.6,
               method = 'ngb',
               group = "atividade"

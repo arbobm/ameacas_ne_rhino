@@ -3,19 +3,19 @@
 box::use(
   readxl[
     read_xlsx
-    ],
+  ],
   dplyr[
     filter, select
   ],
   stringr[
     str_replace_all
-    ],
+  ],
   sf[
     st_as_sf, st_transform
   ],
   dplyr[
     arrange, desc, pull
-    ]
+  ]
 )
 
 

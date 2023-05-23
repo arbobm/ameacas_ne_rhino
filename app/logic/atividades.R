@@ -110,4 +110,3 @@ estradas_federais <- read_sf("app/shapes/estradas_federais.shp")
 ferrovias <- read_sf("app/shapes/ferrivias.shp")
 
 
-

@@ -42,4 +42,3 @@ formata_numero <- function(numero, casas_decimais = 2) {
               scientific = FALSE, decimal.mark = ",")
   return(n)
 }
-

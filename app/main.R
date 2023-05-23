@@ -54,9 +54,9 @@ box::use(
                        aerogeradores, eols_pol, ufv, mineracao, ahes, ahes_pol,
                        reserv_recrea, silvicultura, estradas_federais, ferrovias,
                        barragens_anm],
-
-         
-
+  
+  
+  
   app/logic/funcoes[formata_numero]
   
   
@@ -65,7 +65,7 @@ box::use(
 #' @export
 ui <- function(id) {
   ns <- NS(id)
-
+  
   navbarPage("PAN Herpetofauna do Nordeste",
              id = "nav",
              
@@ -78,87 +78,87 @@ ui <- function(id) {
                       div(class = "outer",
                           # aqui vai o modulo com o mapa grande
                           tagList(
-                          leafletOutput(ns("map"), width = "100%", height = "100%"),
-                          
-                          absolutePanel(id = "controls", class="panel panel-default", 
-                                        fixed = TRUE, draggable = TRUE, top = 60, 
-                                        left = 20, right = "auto", bottom = 50,
-                                        width = 400, style = "overflow-y: scroll;",
-                                        
-                                        ## Selecionar espécies ameacadas
-                                        
-                                        ## Selecionar espécies ameacadas
-                                        
-                                        pickerInput(ns("especies"),
-                                                    label = h5("Espécies:"), 
-                                                    choices = species_list, 
-                                                    multiple = TRUE,
-                                                    options = list(`actions-box` = TRUE)
-                                        ),
-                                        
-                                        
-                                        
-                                        
-                                        actionButton(ns("update"), "Atualizar"),
-                                        
-                                        # h4("Áreas protegidas:"),
-                                        # checkboxInput(inputId = "ucs", 
-                                        #               label = h5("Unidades de Conservação"),
-                                        #               value = FALSE),
-                                        # 
-                                        # checkboxInput(inputId = "tis", 
-                                        #               label = h5("Terras Indígenas"),
-                                        #               value = FALSE),
-                                        # 
-                                        # br(),
-                                        
-                                        h4("Ameaças potenciais:"),
-                                        checkboxInput(ns("agricultura"),
-                                                      label = h5("Agricultura"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("areasurbanas"),
-                                                      label = h5("Áreas urbanas"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("pastagem"),
-                                                      label = h5("Pastagem"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("silvicultura"),
-                                                      label = h5("Silvicultura"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("eol"), 
-                                                      label = h5("Parques eólicos"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("aerogeradores"), 
-                                                      label = h5("Aerogeradores"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("ufv"), 
-                                                      label = h5("Parques de energia solar"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("mineracao"),
-                                                      label = h5("Mineração"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("mineracaoanm"),
-                                                      label = h5("Mineração - barragens"),
-                                                      value = FALSE),
-                                        
-                                        checkboxInput(ns("ahe"), 
-                                                      label = h5("Hidrelétricas - pontos"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("ahepol"), 
-                                                      label = h5("Hidrelétricas - reservatórios"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("reservrecreac"), 
-                                                      label = h5("Recreação"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("estradas"), 
-                                                      label = h5("Rodovias"),
-                                                      value = FALSE),
-                                        checkboxInput(ns("ferrovias"), 
-                                                      label = h5("Ferrovias"),
-                                                      value = FALSE)
-                                        
-                          )
-                      ))
+                            leafletOutput(ns("map"), width = "100%", height = "100%"),
+                            
+                            absolutePanel(id = "controls", class="panel panel-default", 
+                                          fixed = TRUE, draggable = TRUE, top = 60, 
+                                          left = 20, right = "auto", bottom = 50,
+                                          width = 400, style = "overflow-y: scroll;",
+                                          
+                                          ## Selecionar espécies ameacadas
+                                          
+                                          ## Selecionar espécies ameacadas
+                                          
+                                          pickerInput(ns("especies"),
+                                                      label = h5("Espécies:"), 
+                                                      choices = species_list, 
+                                                      multiple = TRUE,
+                                                      options = list(`actions-box` = TRUE)
+                                          ),
+                                          
+                                          
+                                          
+                                          
+                                          actionButton(ns("update"), "Atualizar"),
+                                          
+                                          # h4("Áreas protegidas:"),
+                                          # checkboxInput(inputId = "ucs", 
+                                          #               label = h5("Unidades de Conservação"),
+                                          #               value = FALSE),
+                                          # 
+                                          # checkboxInput(inputId = "tis", 
+                                          #               label = h5("Terras Indígenas"),
+                                          #               value = FALSE),
+                                          # 
+                                          # br(),
+                                          
+                                          h4("Ameaças potenciais:"),
+                                          checkboxInput(ns("agricultura"),
+                                                        label = h5("Agricultura"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("areasurbanas"),
+                                                        label = h5("Áreas urbanas"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("pastagem"),
+                                                        label = h5("Pastagem"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("silvicultura"),
+                                                        label = h5("Silvicultura"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("eol"), 
+                                                        label = h5("Parques eólicos"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("aerogeradores"), 
+                                                        label = h5("Aerogeradores"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("ufv"), 
+                                                        label = h5("Parques de energia solar"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("mineracao"),
+                                                        label = h5("Mineração"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("mineracaoanm"),
+                                                        label = h5("Mineração - barragens"),
+                                                        value = FALSE),
+                                          
+                                          checkboxInput(ns("ahe"), 
+                                                        label = h5("Hidrelétricas - pontos"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("ahepol"), 
+                                                        label = h5("Hidrelétricas - reservatórios"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("reservrecreac"), 
+                                                        label = h5("Recreação"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("estradas"), 
+                                                        label = h5("Rodovias"),
+                                                        value = FALSE),
+                                          checkboxInput(ns("ferrovias"), 
+                                                        label = h5("Ferrovias"),
+                                                        value = FALSE)
+                                          
+                            )
+                          ))
              ),
              # aba 2 ------------------------------------------------------------
              
@@ -196,11 +196,11 @@ ui <- function(id) {
                       # p("- Se deixar o campo de Espécies vazio, aparecem todos os pontos.")
              )
              
-                                        
-                                        
-                                        
-                            
-                            
+             
+             
+             
+             
+             
   )
 }
 
@@ -464,21 +464,21 @@ server <- function(id) {
     })
     
     
-
+    
     ### lista de espécies
-
-
+    
+    
     # update species list
-
+    
     new_species_list <- reactive({
       sp_list <- occ |>
         dplyr::select(nome_cientifico) |>
         dplyr::arrange(nome_cientifico) |>
         dplyr::distinct() |>
         dplyr::pull(nome_cientifico)
-
+      
     })
-
+    
     observe({
       # updateSelectizeInput(session,
       updatePickerInput(session,
@@ -487,48 +487,48 @@ server <- function(id) {
                         # selected = head(new_species_list(), 1)
       )
     })
-
-
-
+    
+    
+    
     # Filter distributions
     distribution <- reactive({
-
-
+      
+      
       combined_distribution |>
         filter(nome_cientifico %in% input$especies)
-
-
+      
+      
     })
-
+    
     observeEvent(
-
+      
       input$update,
-
+      
       {
         show_modal_spinner()
         distribution <- distribution()
         # bbox <- sf::st_bbox(as(distribution, "sf")) |>
         #   as.vector()
-
-
+        
+        
         # sp_factpal <- colorFactor(sp_pal, domain = distribution$taxon)
-
+        
         colors <- c("#cce226", # Quase Ameaçada (NT)
                     "#fae813",  # Vulnerável (VU)
                     "#fc7f40", # Em Perigo (EN)
                     "#d81e06", # Criticamente em Perigo (CR)
                     "#000000" # Extinta (EX)
-
-
+                    
+                    
         )
-
+        
         occ$cat_validada <- factor(occ$cat_validada,
                                    levels = c("Quase Ameaçada (NT)",
                                               "Vulnerável (VU)",
                                               "Em Perigo (EN)",
                                               "Criticamente em Perigo (CR)",
                                               "Extinta (EX)"))
-
+        
         occ <- occ |>
           dplyr::mutate(group =
                           case_when(
@@ -538,10 +538,10 @@ server <- function(id) {
                             cat_validada == "Criticamente em Perigo (CR)" ~ "cr",
                             cat_validada == "Extinta (EX)" ~ "ex"
                           ))
-
+        
         factpal <- colorFactor(colors, domain = occ$cat_validada)
-
-
+        
+        
         leafletProxy("map", data = distribution) |>
           clearGroup("distribution") |>
           clearGroup("occpoints") |>
@@ -552,11 +552,11 @@ server <- function(id) {
           removeControl("distribution") |>
           clearImages() |>
           clearControls() |>
-
+          
           # distribution <- occ
           # leaflet() |>
           # addTiles() |>
-
+          
           addCircleMarkers(data = distribution, group = "occpoints",
                            lng =  ~ as.numeric(long),
                            lat =  ~ as.numeric(lat),
@@ -590,7 +590,7 @@ server <- function(id) {
                              distribution$descricao_amecas
                            ),
                            popupOptions = popupOptions(maxWidth = 500)
-
+                           
           ) |>
           addLegend(data = distribution,
                     position = "topright",
@@ -601,11 +601,11 @@ server <- function(id) {
                     title = "Espécies")
         # |>
         #   fitBounds(bbox[1], bbox[2], bbox[3], bbox[4])
-
+        
         ### termina mapa espécie alvo ------------
         
         # ### começa mapa de agricultura ------------------------------------------------------
-   
+        
         
         if (input$agricultura) {
           
@@ -951,8 +951,8 @@ server <- function(id) {
                                        domain = barragens_anm$ctgr_d_)
           
           leafletProxy("map", data = distribution) |>
-          # leaflet() |> 
-          #   addTiles() |> 
+            # leaflet() |> 
+            #   addTiles() |> 
             addCircleMarkers(
               group = "atividade",
               data = barragens_anm,
@@ -1275,8 +1275,8 @@ server <- function(id) {
     
     
     
-        
-      
+    
+    
     
   })
 }

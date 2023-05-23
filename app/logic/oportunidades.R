@@ -3,7 +3,7 @@
 box::use(
   sf[
     read_sf, st_transform
-    ],
+  ],
   leaflet[
     colorFactor
   ],
@@ -94,7 +94,6 @@ kba_ne <- kba_ne |>
 # lapply(kba_se_t, unique)
 
 # writexl::write_xlsx(kba_se_t, "C:/Users/bruna/OneDrive/01_BaseSIG/Brasil/kba/Brazil_KBA/kba_se.xlsx")
-
 
 
 

@@ -173,6 +173,8 @@ ui <- function(id) {
                         br(),
                         "- Se deixar o campo 'Espécies' vazio e apertar 'Atualizar', aparecem todos os pontos;",
                         br(),
+                        "- Se deixar a aba aberta por muito tempo, especialmente em segundo plano, o site desconecta;",
+                        br(),
                         
                       )
              ),

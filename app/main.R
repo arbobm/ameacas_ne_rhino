@@ -4,7 +4,7 @@ box::use(
   shiny[
     navbarPage, tabPanel, div, moduleServer, NS, renderUI, tags, uiOutput,
     absolutePanel, reactive, observe, observeEvent, h3, h4, h5, strong, 
-    checkboxInput, actionButton, p, br, req, tagList
+    checkboxInput, actionButton, p, br, req, tagList, HTML, helpText, em
   ],
   leaflet[
     leafletOutput, renderLeaflet, colorFactor, addMapPane, addProviderTiles,
@@ -41,7 +41,8 @@ box::use(
   ],
   stringr[
     word
-  ]
+  ],
+  reactable[renderReactable, reactableOutput, reactable, colDef]
 )
 
 box::use(
@@ -148,7 +149,7 @@ ui <- function(id) {
                                                         label = h5("Hidrelétricas - reservatórios"),
                                                         value = FALSE),
                                           checkboxInput(ns("reservrecreac"), 
-                                                        label = h5("Recreação"),
+                                                        label = h5("Recreação - reservatórios"),
                                                         value = FALSE),
                                           checkboxInput(ns("estradas"), 
                                                         label = h5("Rodovias"),
@@ -164,39 +165,65 @@ ui <- function(id) {
              
              tabPanel("Modo de Usar",
                       
-                      h3(strong("Em construção!!",
-                                br(),
-                                br())),
+                      
+                      h3("Instruções gerais:",
+                         br(),
+                         br()),
+                      
                       
                       p(
-                        "- Tem que apertar o botão 'Atualizar' pra fazer as camadas da barra da esquerda aparecerem;",
+                        
+                        "- No menu da barra lateral, a esquerda, é possível 
+                        selecionar as espécies e ameaças potenciais que 
+                        ocorrem na região a ser visualizada. Cada vez que uma 
+                        nova camada for selecionada, é necessário pressionar o botão ", 
+                        strong("Atualizar"), " para que a(s) camada(s) sejam adicionadas ao mapa;",
+                        
+                        helpText("Obs: Camadas relacionadas a cobertura do solo e camadas que 
+                                 ocupam uma grande extensão do território podem demorar um pouquinho mais 
+                                 para carregar."),
+                        
+                        "- No canto inferior direito estão camadas relacionadas a limites geográficos, áreas protegidas,
+                        projetos interessantes localizados no território que podem ser adicionados para referência
+                        simultâneamente às camadas relacionadas às ameaças;",
                         br(),
-                        "- Se deixar o campo 'Espécies' vazio e apertar 'Atualizar', aparecem todos os pontos;",
-                        br(),
-                        "- Se deixar a aba aberta por muito tempo, especialmente em segundo plano, o site desconecta;",
+
+                     
+                        "- Procure não deixar o ", em("site"), "aberto por muito tempo esquecido no navegador 
+                        ou ele pode desconectar e será preciso entrar novamente.",
                         br(),
                         
                       )
              ),
              # aba 3 ------------------------------------------------------------
              
-             tabPanel("Fontes",
-                      h3(strong("Em construção!!",
-                                br(),
-                                br())),
-                      p("Colocar tabela com fonte dos dados usando a do Mapbiomas como modelo.")
-             ),
-             
-             # aba 4 ------------------------------------------------------------
-             
-             tabPanel("Créditos",
+             tabPanel("Ameaças por grupos", id = "titulo-ameacas",
+                      h3(strong("Frequência das ameaças citadas por grupos avaliados")),
                       
-                      h3(strong("Em construção!!",
-                                br(),
-                                br())),
                       
-                      # p("- Se deixar o campo de Espécies vazio, aparecem todos os pontos.")
+                      tags$div(
+                      
+                      HTML('
+                     <div class="flourish-embed flourish-hierarchy" data-src="visualisation/13869226"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+                        ')
+                      )
+                      
+                      
+                      
+                      
+                      ),
+             
+             # aba 3 ------------------------------------------------------------
+             
+             tabPanel("Fonte dos dados",
+                      # h3(strong("Em construção!!",
+                      #           br(),
+                      #           br())),
+                      
+                      reactable::reactableOutput(ns("fontes"))
+                      
              )
+             
              
              
              
@@ -1274,6 +1301,33 @@ server <- function(id) {
       
       
     )
+    
+    output$fontes <- renderReactable({
+      
+      fontes <- readxl::read_xlsx("app/planilhas/fonte_dados.xlsx") |> 
+        janitor::clean_names()
+      
+      fontes$data_download <- lubridate::ymd(fontes$data_download)
+      
+      
+      reactable(fontes,
+                searchable = TRUE,
+                style = list(fontFamily = 'sans-serif'),
+                defaultPageSize = 23,
+                
+                columns = list(
+                  camada = colDef(name = "Camada"),
+                  tipo_de_dado = colDef(name = "Formato"),
+                  categoria = colDef(name = "Categoria"),
+                  fonte = colDef(name = "Fonte"),
+                  resolucao_original = colDef(name = "Resulução original"),
+                  resolucao_utilizada = colDef(name = "Resulução utilizada"),
+                  ano_do_dado = colDef(name = "Ano do dado"),
+                  site = colDef(name = "Site"),
+                  data_download = colDef(name = "Acessado em")
+                )
+      )
+    })
     
     
     

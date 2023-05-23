@@ -42,7 +42,7 @@ box::use(
   stringr[
     word
   ],
-  reactable[renderReactable, reactableOutput, reactable, colDef]
+  reactable[reactable, renderReactable, reactableOutput, colDef]
 )
 
 box::use(

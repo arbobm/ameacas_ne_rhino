@@ -46,7 +46,7 @@ box::use(
 )
 
 box::use(
-  app/view/especies_pts,
+  # app/view/especies_pts,
   app/logic/especies_alvo[species_list, occ, combined_distribution],
   app/logic/limites[biomas, aes_pat, factpal_pats, aes_panne, bacias_ana,
                     ufs_ne],

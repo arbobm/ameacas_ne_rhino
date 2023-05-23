@@ -1314,6 +1314,7 @@ server <- function(id) {
                 searchable = TRUE,
                 style = list(fontFamily = 'sans-serif'),
                 defaultPageSize = 23,
+                showPageSizeOptions = TRUE,
                 
                 columns = list(
                   camada = colDef(name = "Camada"),

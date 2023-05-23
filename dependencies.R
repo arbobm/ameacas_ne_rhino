@@ -1,8 +1,8 @@
 # # This file allows packrat (used by rsconnect during deployment) to pick up dependencies.
-# 
-pacotes <- c("rhino", "leaflet", "shinyWidgets", "sf", "raster", "dplyr", 
-             "stringr", "htmltools", "readxl", "shinybusy", "leaflet.extras",
-             "terra")
+
+# pacotes <- c("rhino", "leaflet", "shinyWidgets", "sf", "raster", "dplyr", 
+#              "stringr", "htmltools", "readxl", "shinybusy", "leaflet.extras",
+#              "github::rspatial/terra")
 # 
 # # In R console
 # renv::install(pacotes)

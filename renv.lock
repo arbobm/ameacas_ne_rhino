@@ -1246,10 +1246,15 @@
     },
     "terra": {
       "Package": "terra",
-      "Version": "1.7-29",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "89c24bf35c961e047df79dde2eb69224",
+      "Version": "1.7-33",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "rspatial",
+      "RemoteRepo": "terra",
+      "RemoteRef": "master",
+      "RemoteSha": "6e1321b71654d5ae94cc4feddab483b8b74e054e",
+      "Hash": "d71e903fcb4159b0bead62390ac958a7",
       "Requirements": [
         "Rcpp"
       ]

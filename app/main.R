@@ -446,7 +446,7 @@ server <- function(id) {
             "KBAs",
             "Labels"
           ),
-          options = layersControlOptions(collapsed = TRUE, position = "bottomright")
+          options = layersControlOptions(collapsed = FALSE, position = "bottomright")
         ) |> 
         ## layers que começam desmarcados
         hideGroup(c(

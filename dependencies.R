@@ -1,6 +1,6 @@
 # # This file allows packrat (used by rsconnect during deployment) to pick up dependencies.
 
-# pacotes <- c("rhino", "leaflet", "shinyWidgets", "sf", "raster", "dplyr", 
+# pacotes <- c("rhino", "leaflet", "shinyWidgets", "sf", "raster", "dplyr",
 #              "stringr", "htmltools", "readxl", "shinybusy", "leaflet.extras",
 #              "github::rspatial/terra")
 # 

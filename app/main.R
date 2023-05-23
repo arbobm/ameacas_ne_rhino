@@ -681,15 +681,15 @@ server <- function(id) {
           cores_pastagem <- freq_area |>
             dplyr::filter(new_id %in% as.numeric(unique(pastagem))) |>
             dplyr::select(new_id, color_number) |>
-            arrange(new_id) |>
-            pull(color_number)
+            dplyr::arrange(new_id) |>
+            dplyr::pull(color_number)
           
           leafletProxy("map", data = distribution) |>
             # leaflet() |>
             #   addTiles() |>
             addRasterImage(
               pastagem,
-              colors = c(cores_pastagem, "transparent"),
+              colors = c(cores_pastagem),
               opacity = 1,
               method = 'ngb',
               group = "atividade"
@@ -713,15 +713,15 @@ server <- function(id) {
           cores_silvicultura <- freq_area |>
             dplyr::filter(new_id %in% as.numeric(unique(silvicultura))) |>
             dplyr::select(new_id, color_number) |>
-            arrange(new_id) |>
-            pull(color_number)
+            dplyr::arrange(new_id) |>
+            dplyr::pull(color_number)
           
           leafletProxy("map", data = distribution) |>
             # leaflet() |>
             #   addTiles() |>
             addRasterImage(
               silvicultura,
-              colors = c(cores_silvicultura, "transparent"),
+              colors = c(cores_silvicultura),
               opacity = 1,
               method = 'ngb',
               group = "atividade"
@@ -945,7 +945,8 @@ server <- function(id) {
           )
           
           barragens_anm$ctgr_d_ <- factor(barragens_anm$ctgr_d_,
-                                          levels = c("Baixo", "Médio", "Alto", "N/A"))
+                                          levels = c("Baixo", "Médio", 
+                                                     "Alto", "N/A"))
           
           pal_barraganm <- colorFactor(cores_barragensanm, 
                                        domain = barragens_anm$ctgr_d_)

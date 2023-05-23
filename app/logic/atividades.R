@@ -97,7 +97,7 @@ reserv_recrea <- read_sf("app/shapes/reserv_recreacao.shp")
 ## silvicultura
 
 #' @export
-silvicultura <- raster("app/rasters/silvicultura_alb_1k.tif")
+silvicultura <- raster("app/rasters/silvicultura_wgs_1k.tif")
 
 ## estradas
 

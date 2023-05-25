@@ -94,7 +94,11 @@ ui <- function(id) {
                                                       label = h5("Espécies:"), 
                                                       choices = species_list, 
                                                       multiple = TRUE,
-                                                      options = list(`actions-box` = TRUE)
+                                                      options = list(`actions-box` = TRUE,
+                                                                     # `deselect-all-text` = "None...",
+                                                                     # `select-all-text` = "Yeah, all !",
+                                                                     `none-selected-text` = "Selecione uma ou mais espécies"
+                                                      )
                                           ),
                                           
                                           

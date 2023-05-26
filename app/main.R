@@ -429,12 +429,15 @@ server <- function(id) {
                     label = ~ htmlEscape(NmArea),
                     options = pathOptions(pane = "polygons")
         ) |> 
+        
+        # leaflet() |> 
+        # addTiles() |> 
         addPolygons(group = "Áreas - PAT",
                     data = aes_pat,
                     fill = TRUE,
                     stroke = TRUE,
                     color = "black",
-                    fillColor = ~ factpal_pats(finalidade),
+                    fillColor = factpal_pats(aes_pat$finalidade),
                     # color = "orange",
                     weight = 2,
                     smoothFactor = 1,

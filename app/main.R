@@ -49,7 +49,7 @@ box::use(
   # app/view/especies_pts,
   app/logic/especies_alvo[species_list, occ, combined_distribution],
   app/logic/limites[biomas, aes_pat, factpal_pats, aes_panne, bacias_ana,
-                    ufs_ne, colors],
+                    ufs_ne],
   app/logic/oportunidades[tis, ucs, pal_ucs, kba_ne],
   app/logic/atividades[freq_area, areas_agric, areas_urb, pastagem, 
                        aerogeradores, eols_pol, ufv, mineracao, ahes, ahes_pol,
@@ -429,15 +429,12 @@ server <- function(id) {
                     label = ~ htmlEscape(NmArea),
                     options = pathOptions(pane = "polygons")
         ) |> 
-        
-        # leaflet() |> 
-        # addTiles() |> 
         addPolygons(group = "Áreas - PAT",
                     data = aes_pat,
                     fill = TRUE,
                     stroke = TRUE,
                     color = "black",
-                    fillColor = ~ factpal_pats(finalidade),
+                    fillColor = factpal_pats(aes_pat$finalidade),
                     # color = "orange",
                     weight = 2,
                     smoothFactor = 1,

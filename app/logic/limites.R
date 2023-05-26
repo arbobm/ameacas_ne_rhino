@@ -99,7 +99,7 @@ for (i in 1:length(aes_pat_files)) {
   
 }
 
-
+#' @export
 aes_pat <- aes_pat_list |> 
   dplyr::bind_rows()
 
@@ -107,10 +107,6 @@ aes_pat$finalidade <- factor(aes_pat$finalidade, levels = c("conservacao",
                                                             "restauracao"),
                              labels = c("Conservação", "Restauração"))
 
-#' @export
-aes_pat
-
-#' @export
 colors <- c("#8B0A50", "#8B7B8B")
 
 #' @export

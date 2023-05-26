@@ -419,13 +419,13 @@ server <- function(id) {
         ) |>
         addPolygons(group = "Áreas estratégicas - PAN",
                     data = aes_panne,
-                    fill = FALSE,
+                    fill = TRUE,
                     stroke = TRUE,
-                    # fillColor = "lightblue",
+                    fillColor = "#af1a19",
                     color = "#af1a19",
                     weight = 2,
                     smoothFactor = 1,
-                    # fillOpacity = 0.0000005,
+                    fillOpacity = 0.2,
                     label = ~ htmlEscape(NmArea),
                     options = pathOptions(pane = "polygons")
         ) |> 

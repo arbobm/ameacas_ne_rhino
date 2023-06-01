@@ -12,7 +12,7 @@ box::use(
     clearImages, clearControls, pathOptions, popupOptions,
     addLegend, addLayersControl, hideGroup, layersControlOptions, addScaleBar,
     addRasterImage, scaleBarOptions, leaflet, providers, addCircleMarkers, 
-    addPolylines
+    addPolylines, addMeasure
   ],
   
   shinyWidgets[
@@ -492,7 +492,18 @@ server <- function(id) {
           "Áreas - PAT",
           "Terras Indígenas"
         )) |>
-        addScaleBar(position = c("bottomleft"), options = scaleBarOptions()) 
+        addScaleBar(position = c("bottomleft"), options = scaleBarOptions()) |> 
+        addMeasure(
+          position = "bottomleft",
+          primaryLengthUnit = "meters",
+          primaryAreaUnit = "sqmeters",
+          activeColor = "#3D535D",
+          completedColor = "#7D4479",
+          localization = "pt_BR",
+          decPoint = ",",
+          thousandsSep = ".",
+          secondaryLengthUnit = "kilometers",
+          secondaryAreaUnit = "hectares")
       
     })
     

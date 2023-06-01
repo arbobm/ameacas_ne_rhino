@@ -264,10 +264,12 @@ server <- function(id) {
         addMapPane("points", zIndex = 440) |>          # Level 4: middle
         addMapPane("labels", zIndex = 450) |>          # Level 5: top
         
-        addProviderTiles(providers$Esri.WorldImagery, group="Satellite", 
+        addProviderTiles(providers$Esri.WorldImagery, group = "Satellite", 
                          options = pathOptions(pane = "background")
         ) |>
         addProviderTiles(providers$Esri.WorldStreetMap, group = "Open Street Map",
+                         options = pathOptions(pane = "background")) |> 
+        addProviderTiles(providers$OpenTopoMap, group = "Open Topo Map",
                          options = pathOptions(pane = "background")) |> 
         addProviderTiles(providers$Stamen.TonerLabels, group="Labels", 
                          options = pathOptions(pane = "labels")) |>
@@ -464,7 +466,8 @@ server <- function(id) {
           baseGroups = c(
             # "Topography",
             "Satellite",
-            "Open Street Map"
+            "Open Street Map",
+            "Open Topo Map"
             # "Terrain",
             
           ),

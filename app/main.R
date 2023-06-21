@@ -1339,8 +1339,8 @@ server <- function(id) {
                   tipo_de_dado = colDef(name = "Formato"),
                   categoria = colDef(name = "Categoria"),
                   fonte = colDef(name = "Fonte"),
-                  resolucao_original = colDef(name = "Resulução original"),
-                  resolucao_utilizada = colDef(name = "Resulução utilizada"),
+                  resolucao_original = colDef(name = "Resolução original"),
+                  resolucao_utilizada = colDef(name = "Resolução utilizada"),
                   ano_do_dado = colDef(name = "Ano do dado"),
                   site = colDef(name = "Site"),
                   data_download = colDef(name = "Acessado em")
